@@ -45,41 +45,44 @@ window.onload = function() {
 
   // Load the textures (book images)
   var textureLoader = new THREE.TextureLoader();
-  var bookCoverTexture = textureLoader.load( 'southern-gems-cover.png' );
-  var bookSpineTexture = textureLoader.load( 'southern-gems-spine.png' );
-  var bookBackTexture = textureLoader.load( 'southern-gems-back.png' );
-  var bookPagesTexture = textureLoader.load( 'southern-gems-pages.png' );
-  var bookPagesTopBottomTexture = textureLoader.load( 'southern-gems-pages-topbottom.png' );
+  var frontTexture = textureLoader.load( '_front.jpg' );
+  var rightTexture = textureLoader.load( '_right.jpg' );
+  var backTexture = textureLoader.load( '_back.jpg' );
+  var leftTexture = textureLoader.load( '_left.jpg' );
+  var topTexture = textureLoader.load( '_top.jpg' );
+  var bottomTexture = textureLoader.load( '_bottom.jpg' );
 
 
   // Use the linear filter for the textures to avoid blurriness
-  bookCoverTexture.minFilter
-    = bookSpineTexture.minFilter
-    = bookBackTexture.minFilter
-    = bookPagesTexture.minFilter
-    = bookPagesTopBottomTexture.minFilter
+  frontTexture.minFilter
+    = rightTexture.minFilter
+    = backTexture.minFilter
+    = leftTexture.minFilter
+    = topTexture.minFilter
+    = bottomTexture.minFilter
     = THREE.LinearFilter;
 
 
   // Create the materials
 
-  var bookCover = new THREE.MeshLambertMaterial( { color: 0xffffff, map: bookCoverTexture } );
-  var bookSpine = new THREE.MeshLambertMaterial( { color: 0xffffff, map: bookSpineTexture } );
-  var bookBack = new THREE.MeshLambertMaterial( { color: 0xffffff, map: bookBackTexture } );
-  var bookPages = new THREE.MeshLambertMaterial( { color: 0xffffff, map: bookPagesTexture } );
-  var bookPagesTopBottom = new THREE.MeshLambertMaterial( { color: 0xffffff, map: bookPagesTopBottomTexture } );
+  var frontMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, map: frontTexture } );
+  var rightMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, map: rightTexture } );
+  var backMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, map: backTexture } );
+  var leftMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, map: leftTexture } );
+  var topMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, map: topTexture } );
+  var bottomMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, map: bottomTexture } );
 
   var materials = [
-    bookPages,          // Right side
-    bookSpine,          // Left side
-    bookPagesTopBottom, // Top side
-    bookPagesTopBottom, // Bottom side
-    bookCover,          // Front side
-    bookBack            // Back side
+    leftMaterial,           // Right side
+    rightMaterial,          // Left side
+    topMaterial,            // Top side
+    bottomMaterial,         // Bottom side
+    frontMaterial,          // Front side
+    backMaterial            // Back side
   ];
 
   // Create the book and add it to the scene
-  var book = new THREE.Mesh( new THREE.BoxGeometry( 7, 10, 1.2, 4, 4, 1 ), materials );
+  var book = new THREE.Mesh( new THREE.BoxGeometry( 6, 9, 6 ), materials );
   scene.add( book );
 
   // Create the orbit controls for the camera
